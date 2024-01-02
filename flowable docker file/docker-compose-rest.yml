@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+    flowable-db:
+        image: postgres
+        restart: always
+        ports:
+            - 5433:5432
+        environment:
+           POSTGRES_USERNAME: flowable
+           POSTGRES_PASSWORD: flowable
+
+    flowable-rest-app:
+        image: flowable/flowable-rest
+        depends_on:
+            - flowable-db
+        environment:
+            - SERVER_PORT=9977
+            - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
+            - SPRING_DATASOURCE_USERNAME=flowable
+            - SPRING_DATASOURCE_PASSWORD=flowable
+            - FLOWABLE_REST_APP_ADMIN_USER-ID=rest-admin
+            - FLOWABLE_REST_APP_ADMIN_PASSWORD=test
+            - FLOWABLE_REST_APP_ADMIN_FIRST-NAME=Rest
+            - FLOWABLE_REST_APP_ADMIN_LAST-NAME=Admin
+        ports:
+            - 9977:9977
+volumes:
+    db_data: {}
+
+
+# flowable-rest: http://localhost:9977/flowable-rest
+# flowable-rest-swagger: http://localhost:9977/flowable-rest/docs
+
+# flowable-idm: http://localhost:8080flowable-idm
+# flowable-task: http://localhost:9999/flowable-task
+# flowable-modeler: http://localhost:8888/flowable-modeler
+# flowable-admin: http://localhost:9988/flowable-admin
+  
