@@ -117,7 +117,9 @@ volumes:
 # flowable-rest: http://localhost:9977/flowable-rest
 # flowable-rest-swagger: http://localhost:9977/flowable-rest/docs
 
-# flowable-idm: http://localhost:8080flowable-idm
+# flowable-idm: http://localhost:8082/flowable-idm
+#admin/test
+
 # flowable-task: http://localhost:9999/flowable-task
 # flowable-modeler: http://localhost:8888/flowable-modeler
 # flowable-admin: http://localhost:9988/flowable-admin
