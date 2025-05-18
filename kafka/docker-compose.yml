@@ -11,6 +11,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zoo1:2888:3888
+    volumes:
+      - zoo1_data:/var/lib/zookeeper  
 
   kafka1:
     image: confluentinc/cp-kafka:7.3.2
@@ -36,6 +38,8 @@ services:
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
+    volumes:
+      - zoo1_data:/var/lib/zookeeper  
   kafdrop:
     image: obsidiandynamics/kafdrop
     restart: "no"
@@ -45,5 +49,10 @@ services:
       KAFKA_BROKERCONNECT: "kafka1:29092"
       JVM_OPTS: "-Xms128M -Xmx256M -Xss512K"
     depends_on:
-      - "kafka1"   
+      - "kafka1" 
+      
+volumes:
+  zoo1_data:
+  kafka1_data:      
+      
  
